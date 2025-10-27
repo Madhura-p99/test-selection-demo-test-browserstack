@@ -14,9 +14,9 @@ A comprehensive TestNG-based automation framework with **Smart Test Selection** 
 
 - [Smart Test Selection Configuration](#-smart-test-selection-configuration)
 
-- [How Smart Test Selection Works](#-how-smart-test-selection-works)
+- [How Smart Test Selection Works?](#-how-smart-test-selection-works)
   
-- [How to Use the Demo Code Repo for Smart Test Selection](#-how-to-use-the-demo-code-repo-for-smart-test-selection)
+- [How to Use the Demo Code Repo for Smart Test Selection?](#-how-to-use-the-demo-code-repo-for-smart-test-selection)
 
 - [BrowserStack Integration](#-browserstack-integration)
 
@@ -171,7 +171,7 @@ testOrchestrationOptions:
 
 ---
 
-## How Smart Test Selection Works
+## ⏳ How Smart Test Selection Works?
 
 - **Project Name and Build Name:**  
   The `projectName` and `buildName` in your configuration must be static and consistent across builds. This ensures that all executions are grouped together for model training and predictions.
@@ -184,7 +184,7 @@ testOrchestrationOptions:
 
 ---
 
-## How to Use the Demo Code Repo for Smart Test Selection
+## 🕹️ How to Use the Demo Code Repo for Smart Test Selection?
 
 1. **Use an Existing PR or Create a New One:**  
    To simulate code changes, you can **use any existing pull request (PR)** or **create a new PR** in `test-selection-demo-app-browserstack` with updates or bugs.
