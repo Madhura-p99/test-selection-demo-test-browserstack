@@ -1,71 +1,85 @@
-# 🎯 Smart Test Selection Demo - BrowserStack TestNG Framework
+# Smart Test Selection & Orchestration AI Agent Demo for BrowserStack Automate
 
-A comprehensive TestNG-based automation framework with **Smart Test Selection** capabilities, demonstrating how AI-powered test selection can optimize your test execution by running only relevant tests based on code changes.
-
-## 📋 Table of Contents
-
+## Table of Contents
 - [What is Smart Test Selection?](#-what-is-smart-test-selection)
 
-- [Prerequisites](#-prerequisites)
+- [Introduction](#-introduction)
 
-- [Quick Start](#-quick-start)
-
-- [Test Execution Examples](#-test-execution-examples)
+- [Setup Instructions](#-setup-instructions)
+  - [Prerequisites](#-prerequisites)
+  - [Step 1: Clone and Run Demo Application](#-step-1-clone-and-run-demo-application)
+  - [Step 2: Clone and Build Test Repository](#-step-2-clone-and-build-test-repository)
+  - [Step 3: Run Your First Tests](#-step-3-run-tests)
 
 - [Smart Test Selection Configuration](#-smart-test-selection-configuration)
-
-- [How Smart Test Selection Works?](#-how-smart-test-selection-works)
+    
+- [Running the Demo](#-running-the-demo)
+  - [Learning Mode](#-learning-mode)
+  - [Prediction Mode](#-prediction-mode)
   
-- [How to Use the Demo Code Repo for Smart Test Selection?](#-how-to-use-the-demo-code-repo-for-smart-test-selection)
-
-- [BrowserStack Integration](#-browserstack-integration)
+- [Additional Resources](#-additional-resources)
 
 ---
 
-## 🤖 What is Smart Test Selection?
+## What is Smart Test Selection?
 
-**Smart Test Selection** is an AI-powered feature that analyzes your code changes and intelligently selects only the relevant tests to run, significantly reducing test execution time while maintaining confidence in your releases.
+**BrowserStack’s Smart Test Selection** is an AI-powered agent that determines the impact of code changes on your test suite and intelligently selects the relevant tests to run — helping you ship faster with fewer builds, reduced infrastructure costs, and quicker feedback loops.
 
-### How It Works:
+## Introduction
 
-1.  **Code Analysis**: Analyzes changes between base and feature branches.
-2.  **Impact Detection**: Identifies which application modules are affected by the changes.
-3.  **Test Selection**: Automatically selects only relevant tests that cover the changed code.
-4.  **Execution Modes**:
-    -  `relevantFirst`: Runs relevant tests first, then remaining tests.
-    -  `relevantOnly`: Runs only relevant tests.
+This repository demonstrates Smart Test Selection in action using the TestNG-based Java framework. It integrates with the BrowserStack Java SDK and demonstrates how AI-powered test selection can optimize your test execution by running only relevant tests based on code changes.
 
+**The demo setup uses two repositories:**
+- Application Code Repo – [test-selection-demo-app-browserstack](https://github.com/browserstack/test-selection-demo-app-browserstack)
+- Test Code Repo – [test-selection-demo-test-browserstack](https://github.com/browserstack/test-selection-demo-test-browserstack)
 
-### Benefits
-- ⚡ **Faster Feedback** — Reduce test execution time
-- 💰 **Cost Optimization** — Lower cloud testing costs
-- 🎯 **Focused Testing** — Run tests that matter for your changes
-- 🚀 **Faster CI/CD** — Accelerate your deployment pipeline
+You will run builds to observe:  
+- **Learning Mode** – when the agent learns from the code diff metadata and test execution data  
+- **Prediction Mode** – when the agent starts predicting and running only relevant tests
 
+**Test Execution Modes**:
+- `relevantFirst`: Runs relevant tests first, then remaining tests
+- `relevantOnly`: Runs only relevant tests
 
 ---
 
-## 📦 Prerequisites
+## Setup Instructions
 
-### Required Software
+### Prerequisites
 
--  **Java 11 or higher**: [Download Java](https://www.oracle.com/java/technologies/downloads/)
+-  **Java 11 or higher**: [Download Java](https://www.oracle.com/java/technologies/downloads/)  
+   After installation, set your `JAVA_HOME` environment variable:  
+    - **Mac / Linux**
+        ```bash
+        export JAVA_HOME=$(/usr/libexec/java_home)
+        ```
+    - **Windows (PowerShell)**
+        ```powershell
+        setx JAVA_HOME "C:\Program Files\Java\jdk-11"
+        ```
 
--  **Maven 3.6 or higher**: [Download Maven](https://maven.apache.org/download.cgi)
+-  **Maven 3.6 or higher**: [Download Maven](https://maven.apache.org/download.cgi)  
+     After installation, add Maven to your system `PATH`:
+     - **Mac / Linux**
+        ```bash
+        export PATH=$PATH:/opt/apache-maven-3.6.3/bin
+        ```
+    - **Windows (PowerShell)**
+        ```powershell
+        setx PATH "%PATH%;C:\apache-maven-3.6.3\bin"
+        ```
 
--  **Google Chrome**: [Download Chrome](https://www.google.com/chrome/)
+- **Node.js 16 or higher**: [Download Node.js](https://nodejs.org/en/download)  
 
 -  **Git**: [Download Git](https://git-scm.com/downloads)
 
-### BrowserStack Account
-
-- Sign up at [BrowserStack](https://www.browserstack.com/) for cloud testing
+- **BrowserStack Account**:  
+    - Sign up at [BrowserStack](https://www.browserstack.com/) for cloud testing
+    - Ensure AI is enabled in your BrowserStack Account. For more details, see [activate BrowserStack AI preferences](https://www.browserstack.com/docs/iaam/settings-and-permissions/activate-browserstack-ai)
 
 ---
 
-## 🚀 Quick Start
-
-### Step 1: Clone and Setup Demo Application
+### Step 1: Clone and Run Demo Application
 ```
 # Clone the demo application repository
 git clone https://github.com/browserstack/test-selection-demo-app-browserstack.git
@@ -84,57 +98,34 @@ The application will start:
 
 Keep this running in a separate terminal.
 
-### Step 2: Clone and Setup Test Repository
+### Step 2: Clone and Build Test Repository
 
 ```
 # Clone this test repository
 git clone https://github.com/browserstack/test-selection-demo-test-browserstack.git
 cd test-selection-demo-test-browserstack
 
+# Checkout the TestNG demo branch
+git checkout testng-automate
+
 # Build the project (downloads dependencies)
 mvn clean install
-```
+```  
+Update `username` and `accesskey` in the browserstack.yml file with your BrowserStack access credentials retrieved from [here](https://www.browserstack.com/accounts/profile/details)
 
 ### Step 3: Run Your First Tests
 
 ```
-# Run smoke tests locally (fastest way to verify setup)
-mvn clean test -P smoke-tests
-
-# Run all tests locally
+# Run all tests locally (to verify setup)
 mvn test
 ```
 ---
 
-## 🎯 Test Execution Examples
-
-```
-# Quick smoke tests (5-10 minutes)
-mvn clean test -P smoke-tests
-
-# Critical tests for release validation (5-7 minutes)
-mvn clean test -P critical-tests
-
-# UI-focused tests (8-12 minutes)
-mvn clean test -P ui-tests
-
-# Management features (all user, product, task, order tests)
-mvn clean test -P management-tests
-
-# Full regression suite (20-30 minutes)
-mvn clean test -P regression-tests
-
-# Performance tests
-mvn clean test -P performance-tests
-```
-
-## ⚙️ Smart Test Selection Configuration
-
-### Two Ways to Enable Smart Test Selection
+## Smart Test Selection Configuration
 
 BrowserStack offers **two methods** to enable Smart Test Selection in your test automation workflows:
 
-1. **Repository Cloning:**  
+1. **Repository Cloning:** (used in this demo)  
    BrowserStack clones your application source code locally (from a git repo or local path) to analyze code changes and select relevant tests.  
    [Learn more](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java#Repo_cloning)
 
@@ -142,16 +133,13 @@ BrowserStack offers **two methods** to enable Smart Test Selection in your test 
    BrowserStack's GitHub App connects directly to your GitHub repository for seamless code analysis and test selection—no manual cloning required.  
    [Learn more](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java#GitHub_app)
 
----
 
-> **Demo Note:**  
-> For this project, **repository cloning** is used, since the demo application code must be cloned locally for test execution.
+> **Note:**  
+> For this demo, since **repository cloning** is used, the demo application code must be cloned locally for test execution
 
----
+### browserstack.yml Configuration: 
 
-### BrowserStack Configuration: `browserstack.yml`
-
-Update your `browserstack.yml` as follows to enable Smart Test Selection using repo cloning:
+Update your `browserstack.yml` as given below to enable Smart Test Selection using repo cloning:
 
 ```yaml
 browserstackLocal: true # for local testing
@@ -160,73 +148,70 @@ testOrchestrationOptions:
     enabled: true
     source:
       - '<path_to_demo_code_locally_cloned>'
-    mode: 'relevantFirst' # or 'relevantOnly'
+    mode: 'relevantOnly'
 ```
 
 - Replace `<path_to_demo_code_locally_cloned>` with the actual local path of the cloned demo application repository.
 
-**Execution Modes:**
-- `relevantFirst` (Recommended): Runs relevant tests first, then remaining tests
-- `relevantOnly`: Runs only relevant tests
+---
+
+## Running the demo  
+
+**Use the Demo Application to Simulate Application Code Changes:**  
+To simulate code changes, you can use any existing pull request (PR) or create a new PR in [test-selection-demo-app-browserstack](https://github.com/browserstack/test-selection-demo-app-browserstack) with updates or small bugs  
+In the demo app repository, check out a feature branch with known changes (for example: [search_section_bug](https://github.com/browserstack/test-selection-demo-app-browserstack/tree/search_section_bug), [add_product_error_msg](https://github.com/browserstack/test-selection-demo-app-browserstack/tree/add_product_error_msg), or [new_product_bug](https://github.com/browserstack/test-selection-demo-app-browserstack/tree/new_product_bug))  
+
+### Learning Mode  
+In this mode, the agent learns relationships between code changes and tests.
+1. In the test repo, update your `browserstack.yml` with build details:
+    ```yaml
+    projectName: Sample Smart Test Selection Project
+    buildName: Sample Smart Test Selection Learning Build
+    ```
+
+    > **Note:**  
+    > You can also use any other `buildName` that contains only alphabets and underscores. Avoid dynamic names with numbers, dates, or timestamps.  
+    > Ensure that both projectName and buildName remain static and consistent across builds (to ensure that all executions of the same build are grouped together for learning and
+    > prediction)
+
+2. Run the test suite:
+   ```
+   mvn test
+   ```
+   When you execute tests, Smart Test Selection compares your checked-out branch with the base branch (main), analyzes code diffs, and learns which tests are impacted
+
+3. Check results on your [BrowserStack Automate Dashboard](https://automate.browserstack.com/overview?tab=all)  
+   Go to your Build View → Insights tab → Build Optimization widget → View capabilities
+   You should see the Learning Mode indicator enabled for this build
+
+### Prediction Mode
+Once training is complete, the agent begins predicting which tests to run for each change
+1. In the test repo, update your `browserstack.yml` with build details:
+    ```yaml
+    projectName: Sample Smart Test Selection Project
+    buildName: Sample Smart Test Selection Prediction Build
+    ```
+
+    > **Note:**  
+    > Use the provided `buildName` to access a build where agent is already in prediction mode (saves the initial learning time)  
+    > If you use a new buildName, the agent will start in learning Mode and typically needs 12–20 builds to learn before predicting  
+    > Ensure that both projectName and buildName remain static and consistent across builds (to ensure that all executions of the same build are grouped together for learning and                prediction)
+
+2. Run the test suite:
+   ```
+   mvn test
+   ```
+
+3. Check results on your [BrowserStack Automate Dashboard](https://automate.browserstack.com/overview?tab=all)  
+   Go to your Build View → Insights tab → Build Optimization widget.
+   The Build Optimisation Widget shows the percentage of tests skipped and the total time saved for the build
 
 ---
 
-## ⏳ How Smart Test Selection Works?
+## Additional Resources
 
-- **Project Name and Build Name:**  
-  The `projectName` and `buildName` in your configuration must be static and consistent across builds. This ensures that all executions are grouped together for model training and predictions.
-
-- **Training Data Collection:**  
-  Data collection and model training occurs when a build contains at least one test failure. The system needs to observe failing and passing tests to learn code-to-test relationships.
-
-- **Initial Training:**  
-  The first 12-20 builds (with at least one failure) are used for initial data collection and model training. Once enough builds have run and the accuracy threshold is met, Smart Test Selection will start making predictions from the next build onwards.
+- [BrowserStack Automate Dashboard](https://automate.browserstack.com/overview?tab=all) - View test execution results
+- [Smart Test Selection Documentation (Java)](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java) - Learn more about how Smart Test Selection works
+- [BrowserStack Java SDK Docs](https://www.browserstack.com/docs/automate/selenium/sdk-benefits?fw-lang=java%2Ftestng)
 
 ---
-
-## 🕹️ How to Use the Demo Code Repo for Smart Test Selection?
-
-1. **Use an Existing PR or Create a New One:**  
-   To simulate code changes, you can **use any existing pull request (PR)** or **create a new PR** in `test-selection-demo-app-browserstack` with updates or bugs.
-
-2. **Check Out the Feature Branch Locally:**  
-   Clone the demo application repository and check out the branch containing your changes (feature branch).
-
-3. **Run Tests with Smart Test Selection:**  
-   When you execute tests (for example, from the SDK), Smart Test Selection will compare the code on your checked-out branch with the origin branch (usually `main`).  
-   It will analyze PR changes, train the model, and predict which tests to run based on the impacted code.
-
----
-
-## 🌐 BrowserStack Integration
-
-### Setup BrowserStack
-1. Sign up at [BrowserStack](https://www.browserstack.com/)
-2. Get your credentials from [Account Settings](https://www.browserstack.com/accounts/settings)
-3. Update \`browserstack.yml\`:
-```
-userName: YOUR_USERNAME
-accessKey: YOUR_ACCESS_KEY
-```
-
----
-
-## 🚀 Quick Reference
-| Need | Command |
-
-|------|---------|
-
-| **Quick validation** | \`mvn clean test -P smoke-tests\` |
-
-| **Complete testing** | \`mvn clean test -P regression-tests\` |
-
----
-
-## 📚 Further Reading
-
-- [Smart Test Selection Docs (Java Example)](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java)
-
-
----
-
-**For more information, visit [BrowserStack Documentation](https://www.browserstack.com/docs).**
