@@ -182,7 +182,9 @@ In this mode, the agent learns relationships between code changes and tests.
 
 3. Check results on your [BrowserStack Automate Dashboard](https://automate.browserstack.com/overview?tab=all)  
    Go to your Build View → Insights tab → Build Optimization widget → View capabilities
-   You should see the Learning Mode indicator enabled for this build
+   You should see the Learning Mode indicator enabled for this build  
+
+   ![Learning Mode Screenshot](./smart-selection-learning-mode-on.webp)  
 
 ### Prediction Mode
 Once training is complete, the agent begins predicting which tests to run for each change
@@ -204,7 +206,9 @@ Once training is complete, the agent begins predicting which tests to run for ea
 
 3. Check results on your [BrowserStack Automate Dashboard](https://automate.browserstack.com/overview?tab=all)  
    Go to your Build View → Insights tab → Build Optimization widget.
-   The Build Optimisation Widget shows the percentage of tests skipped and the total time saved for the build
+   The Build Optimisation Widget shows the percentage of tests skipped and the total time saved for the build  
+
+   ![Prediction Mode Screenshot](./smart-selection-time-savings-details.webp)  
 
 ---
 
