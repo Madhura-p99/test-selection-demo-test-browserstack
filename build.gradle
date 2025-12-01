@@ -15,7 +15,7 @@ dependencies {
 
 group = 'com.browserstack'
 version = '1.0-SNAPSHOT'
-description = 'testng-browserstack'
+description = 'test-selection-demo-test-browserstack'
 sourceCompatibility = '1.8'
 
 def browserstackSDKArtifact = configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts.find { it.name == 'browserstack-java-sdk' }

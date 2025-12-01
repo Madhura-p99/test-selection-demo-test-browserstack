@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.browserstack</groupId>
-    <artifactId>testng-browserstack</artifactId>
+    <artifactId>test-selection-demo-test-browserstack</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>test-selection-demo-test-browserstack</name>
-    <url>https://www.github.com/browserstack/testng-browserstack</url>
+    <url>https://github.com/browserstack/test-selection-demo-test-browserstack</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
