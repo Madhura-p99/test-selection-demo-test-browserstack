@@ -37,7 +37,7 @@ public abstract class BaseUiTest extends SeleniumTest {
             return normalizeBaseUrl(fromConfig);
         }
 
-        return "http://localhost:5000/";
+        return "https://demo-app-sts.netlify.app/";
     }
 
     private static Properties loadConfig() {
