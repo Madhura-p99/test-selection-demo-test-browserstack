@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cross-Platform">
+    <test name="BStackDemo">
+        <classes>
+            <!-- <class name="com.browserstack.BaseUiTest" /> -->
+            <class name="com.browserstack.ScenarioWidgetTests" />
+            <!-- <class name="com.browserstack.CartTests" /> -->
+            <class name="com.browserstack.CheckoutAndOrderTests" />
+            <!-- <class name="com.browserstack.LoginTests" />
+            <class name="com.browserstack.NavigationTests" />
+            <class name="com.browserstack.ProductCatalogTests" /> -->
+        </classes>
+    </test>
+</suite>
