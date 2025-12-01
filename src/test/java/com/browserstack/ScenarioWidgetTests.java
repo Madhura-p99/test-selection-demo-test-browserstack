@@ -10,7 +10,7 @@ public class ScenarioWidgetTests extends BaseUiTest {
 
     @Test
     public void staticIdFieldAcceptsInput() {
-        openPath("/scenarios");
+        openScenariosPage();
         WebElement staticField = waitFor(5)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("static-id-field")));
         staticField.clear();
@@ -20,7 +20,7 @@ public class ScenarioWidgetTests extends BaseUiTest {
 
     @Test
     public void nestedXpathInputIsInteractable() {
-        openPath("/scenarios");
+        openScenariosPage();
         WebElement nestedInput = waitFor(5)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("xpath-input")));
         nestedInput.sendKeys("Nested input text");
@@ -29,7 +29,7 @@ public class ScenarioWidgetTests extends BaseUiTest {
 
     @Test
     public void notificationButtonShowsToast() {
-        openPath("/scenarios");
+        openScenariosPage();
         WebElement submitButton = waitFor(5)
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[title='Submit']")));
         submitButton.click();
@@ -39,7 +39,7 @@ public class ScenarioWidgetTests extends BaseUiTest {
 
     @Test
     public void clipboardButtonShowsLinkCopiedToast() {
-        openPath("/scenarios");
+        openScenariosPage();
         WebElement copyButton = waitFor(5)
                 .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Copy share link')]")));
         copyButton.click();
@@ -49,7 +49,7 @@ public class ScenarioWidgetTests extends BaseUiTest {
 
     @Test
     public void featureToggleChangesVisualState() {
-        openPath("/scenarios");
+        openScenariosPage();
         WebElement toggleButton = waitFor(5)
                 .until(ExpectedConditions.elementToBeClickable(By.id("feature-toggle-btn")));
         String initialClass = toggleButton.getAttribute("class");
@@ -60,7 +60,7 @@ public class ScenarioWidgetTests extends BaseUiTest {
 
     @Test
     public void progressButtonsUpdateStatus() {
-        openPath("/scenarios");
+        openScenariosPage();
                 driver.findElement(By.id("progress-btn-100"))
                 .click();
         WebElement status = waitFor(5)

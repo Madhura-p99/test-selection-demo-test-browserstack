@@ -85,6 +85,11 @@ public abstract class BaseUiTest extends SeleniumTest {
         waitFor(10).until(ExpectedConditions.visibilityOfElementLocated(By.id("hero-title")));
     }
 
+    protected void openScenariosPage() {
+        openPath("/scenarios");
+        waitFor(10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Scenarios')]")));
+    }
+
     protected void loginAs(String email, String password) {
         openPath("/login");
         WebDriverWait wait = waitFor(10);
@@ -189,7 +194,7 @@ public abstract class BaseUiTest extends SeleniumTest {
         wait.until(ExpectedConditions.urlContains("/products"));
     }
 
-    private void sleep(long millis) {
+    protected void sleep(long millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {

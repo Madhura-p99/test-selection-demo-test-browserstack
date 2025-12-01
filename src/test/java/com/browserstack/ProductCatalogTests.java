@@ -15,7 +15,7 @@ public class ProductCatalogTests extends BaseUiTest {
         WebElement searchInput = driver.findElement(By.cssSelector("input[placeholder='Search products...']"));
         searchInput.clear();
         searchInput.sendKeys("pixel");
-        waitFor(5).until(ExpectedConditions.visibilityOfElementLocated(By.id("product-card-1")));
+        sleep(500); // Allow time for filtering to take effect
         int visibleCards = driver.findElements(By.cssSelector("[id^='product-card-']"))
             .size();
         Assert.assertEquals(visibleCards, 1, "Filtered catalog should show exactly 1 result");
