@@ -12,6 +12,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -37,7 +39,7 @@ public abstract class BaseUiTest extends SeleniumTest {
             return normalizeBaseUrl(fromConfig);
         }
 
-        return "https://demo-app-sts.netlify.app/";
+        return "https://demo-app-sts.surge.sh/";
     }
 
     private static Properties loadConfig() {
@@ -199,6 +201,26 @@ public abstract class BaseUiTest extends SeleniumTest {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();
+        }
+    }
+
+    protected void scrollIntoView(WebElement element) {
+        if (element == null) {
+            return;
+        }
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", element);
+        sleep(200);
+    }
+
+    protected void clickWithRetry(WebElement element) {
+        if (element == null) {
+            return;
+        }
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException ex) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         }
     }
 }

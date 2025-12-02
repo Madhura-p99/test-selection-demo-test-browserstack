@@ -3,13 +3,38 @@
 <suite name="Cross-Platform">
     <test name="BStackDemo">
         <classes>
-            <class name="com.browserstack.BaseUiTest" />
-            <class name="com.browserstack.ScenarioWidgetTests" />
-            <class name="com.browserstack.CartTests" />
-            <class name="com.browserstack.CheckoutAndOrderTests" />
-            <class name="com.browserstack.LoginTests" />
-            <class name="com.browserstack.NavigationTests" />
-            <class name="com.browserstack.ProductCatalogTests" />
+            <class name="com.browserstack.CartBadgeDefaultTest" />
+            <class name="com.browserstack.CartCheckoutVisibilityTest" />
+            <class name="com.browserstack.CartClearAllTest" />
+            <class name="com.browserstack.CartDisplaysItemsTest" />
+            <class name="com.browserstack.CartEmptyStateTest" />
+            <class name="com.browserstack.CartQuantityAdjustmentTest" />
+            <class name="com.browserstack.CartRemoveItemTest" />
+            <class name="com.browserstack.CheckoutInvoiceModalTest" />
+            <class name="com.browserstack.CheckoutOrderHistoryTest" />
+            <class name="com.browserstack.HeroSectionCopyTest" />
+            <class name="com.browserstack.LoginInvalidCredentialsTest" />
+            <class name="com.browserstack.LoginPasswordToggleTest" />
+            <class name="com.browserstack.LoginQuickSelectTest" />
+            <class name="com.browserstack.LoginRedirectWhenAuthenticatedTest" />
+            <class name="com.browserstack.LogoutClearsSessionTest" />
+            <class name="com.browserstack.OrderHistoryGuardTest" />
+            <class name="com.browserstack.OrderHistoryLatestEntryTest" />
+            <class name="com.browserstack.ProductAddToCartBadgeTest" />
+            <class name="com.browserstack.ProductCatalogDefaultLoadTest" />
+            <class name="com.browserstack.ProductFilterAndroidTest" />
+            <class name="com.browserstack.ProductFilterIosTest" />
+            <class name="com.browserstack.ProductMultiQuantityCartTest" />
+            <class name="com.browserstack.ProductRemoveFromCartButtonTest" />
+            <class name="com.browserstack.ProductSearchFilterTest" />
+            <class name="com.browserstack.ProfileLinkGuardTest" />
+            <class name="com.browserstack.ScenarioClipboardToastTest" />
+            <class name="com.browserstack.ScenarioFeatureToggleTest" />
+            <class name="com.browserstack.ScenarioNestedXpathInputTest" />
+            <class name="com.browserstack.ScenarioNotificationToastTest" />
+            <class name="com.browserstack.ScenarioProgressButtonsTest" />
+            <class name="com.browserstack.ScenarioStaticIdInputTest" />
+            <class name="com.browserstack.ScenariosCtaNavigationTest" />
         </classes>
     </test>
 </suite>
