@@ -11,7 +11,7 @@ public class LogoutClearsSessionTest extends BaseUiTest {
     @Test
     public void logoutFromProfileClearsSession() {
         loginWithRandomDemoUser();
-        openPath("/profile");
+        openProfilePage();
         waitFor(5).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Logout')]"))).click();
         WebElement loginHeader = waitFor(5).until(
             ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Login') or contains(text(),'Welcome Back')]")));

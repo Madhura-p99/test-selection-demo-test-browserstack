@@ -9,7 +9,7 @@ public class LoginPasswordToggleTest extends BaseUiTest {
 
     @Test
     public void showPasswordToggleChangesInputType() {
-        openPath("/login");
+        openLoginPage();
         WebElement passwordField = driver.findElement(By.id("password-input"));
         Assert.assertEquals(passwordField.getAttribute("type"), "password");
         driver.findElement(By.id("show-password")).click();

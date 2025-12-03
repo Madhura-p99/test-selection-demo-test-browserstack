@@ -10,7 +10,7 @@ public class LoginInvalidCredentialsTest extends BaseUiTest {
 
     @Test
     public void loginFailsWithInvalidCredentials() {
-        openPath("/login");
+        openLoginPage();
         driver.findElement(By.id("email-input")).sendKeys("fake@example.com");
         driver.findElement(By.id("password-input")).sendKeys("wrong-password");
         sleep(1000);

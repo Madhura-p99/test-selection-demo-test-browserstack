@@ -11,7 +11,7 @@ public class CartEmptyStateTest extends BaseUiTest {
     @Test
     public void cartShowsEmptyStateForEmptyCart() {
         loginWithRandomDemoUser();
-        openPath("/cart");
+        openCartPage();
         WebElement empty = waitFor(5).until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Your cart is empty.')]")));
         Assert.assertTrue(empty.isDisplayed());

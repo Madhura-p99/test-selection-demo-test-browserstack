@@ -1,7 +1,0 @@
-{
-  "SELECTION_DEMO_APP": {
-    "url": "https://github.com/browserstack/test-selection-demo-app-browserstack",
-    "baseBranch": "main",
-    "featureBranch": "new_app"
-  }
-}

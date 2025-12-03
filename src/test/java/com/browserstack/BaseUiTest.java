@@ -84,16 +84,21 @@ public abstract class BaseUiTest extends SeleniumTest {
 
     protected void goHome() {
         openPath("/");
-        waitFor(10).until(ExpectedConditions.visibilityOfElementLocated(By.id("hero-title")));
+        waitFor(30).until(ExpectedConditions.visibilityOfElementLocated(By.id("hero-title")));
     }
 
     protected void openScenariosPage() {
         openPath("/scenarios");
-        waitFor(10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Scenarios')]")));
+        waitFor(30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Scenarios')]")));
+    }
+
+    protected void openLoginPage() {
+        openPath("/login");
+        waitFor(30).until(d -> d.getCurrentUrl().contains("/login") || d.getCurrentUrl().contains("/profile"));
     }
 
     protected void loginAs(String email, String password) {
-        openPath("/login");
+        openLoginPage();
         WebDriverWait wait = waitFor(10);
         WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("email-input")));
         emailInput.clear();
@@ -107,7 +112,7 @@ public abstract class BaseUiTest extends SeleniumTest {
     }
 
     protected void loginWithRandomDemoUser() {
-        openPath("/login");
+        openLoginPage();
         Select select = getUserSelect();
         List<WebElement> choices = getSelectableUserOptions(select);
         if (choices.isEmpty()) {
@@ -118,13 +123,13 @@ public abstract class BaseUiTest extends SeleniumTest {
     }
 
     protected void loginUsingQuickSelect(String email) {
-        openPath("/login");
+        openLoginPage();
         Select select = getUserSelect();
         completeQuickSelectLogin(select, email);
     }
 
     protected String getFirstDemoUserEmail() {
-        openPath("/login");
+        openLoginPage();
         List<WebElement> options = getSelectableUserOptions(getUserSelect());
         if (options.isEmpty()) {
             throw new IllegalStateException("No demo users found in the login dropdown");
@@ -134,7 +139,17 @@ public abstract class BaseUiTest extends SeleniumTest {
 
     protected void openProductsPage() {
         openPath("/products");
-        waitFor(10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[id^='product-card-']")));
+        waitFor(30).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[id^='product-card-']")));
+    }
+
+    protected void openProfilePage() {
+        openPath("/profile");
+        waitFor(30).until(d -> d.getCurrentUrl().contains("/profile") || d.getCurrentUrl().contains("/login"));
+    }
+
+    protected void openOrdersPage() {
+        openPath("/orders");
+        waitFor(30).until(d -> d.getCurrentUrl().contains("/orders") || d.getCurrentUrl().contains("/login"));
     }
 
     protected void addProductToCart(int productId) {

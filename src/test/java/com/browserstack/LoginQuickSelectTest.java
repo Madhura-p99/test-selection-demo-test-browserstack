@@ -12,7 +12,7 @@ public class LoginQuickSelectTest extends BaseUiTest {
     public void quickSelectUserCanLogin() {
         String email = getFirstDemoUserEmail();
         loginUsingQuickSelect(email);
-        openPath("/profile");
+        openProfilePage();
         waitFor(10).until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(@class,'text-xl')]")));
         WebElement profileEmail = driver.findElement(By.xpath("//div[contains(@class,'text-gray-600')][1]"));

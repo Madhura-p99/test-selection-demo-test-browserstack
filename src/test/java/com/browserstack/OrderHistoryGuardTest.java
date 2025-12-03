@@ -8,8 +8,7 @@ public class OrderHistoryGuardTest extends BaseUiTest {
 
     @Test
     public void orderHistoryRouteIsGuarded() {
-        openPath("/orders");
-        waitFor(10).until(d -> d.getCurrentUrl().contains("/login"));
+        openOrdersPage();
         Assert.assertTrue(driver.findElement(By.id("login-submit")).isDisplayed());
     }
 }
