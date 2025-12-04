@@ -25,7 +25,7 @@ BrowserStack's Smart Test Selection Agent uses AI to identify and run only the t
 For detailed integration steps follow the [Test Selection Documentation](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java%2Ftestng).
 
 ## Steps to run the demo
-- This demo showcases BrowserStack's Smart Test Selection Agent using the git cloning integration approach. First, we train the agent on code changes from the `demo_app_v2` branch, where the build produces 7 test failures. 
+- This demo showcases BrowserStack's Smart Test Selection Agent using the git cloning integration approach. First, we train the agent on code changes from the `demo_app_v2` branch, and the build results in 7 test failures related to login flow code changes.
 - Then, we run the agent in prediction mode to see how it identifies impacted tests and runs only those, reducing execution time by upto 50%.
 
 ### Prerequisites
@@ -70,7 +70,7 @@ testOrchestrationOptions:
   runSmartSelection:
     enabled: true
     source: # path to cloned demo app repo
-      - '../test-selection-demo-app-browserstack' 
+      - '<path_to_demo_app_locally_cloned>'
     mode: 'relevantOnly'
 ```
 
