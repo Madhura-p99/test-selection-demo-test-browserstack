@@ -41,7 +41,7 @@ git clone https://github.com/browserstack/test-selection-demo-app-browserstack.g
 cd test-selection-demo-app-browserstack
 
 # Install dependencies
-npm run install:all
+npm install
 
 # For the demo, checkout the feature branch
 git checkout demo-app-v2
