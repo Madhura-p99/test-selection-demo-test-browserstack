@@ -1,6 +1,3 @@
-# test-selection-demo-test-browserstack
-Test Selection Demo Test Browserstack
-
 # BrowserStack Smart Test Selection AI Agent
 ---
 ## What is Smart Test Selection?
