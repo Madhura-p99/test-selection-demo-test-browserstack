@@ -11,7 +11,7 @@
 
 ## What is Smart Test Selection?
 BrowserStack's Smart Test Selection Agent uses AI to identify and run only the tests impacted (or likely to fail) by your code changes, reducing build time and cost by up to 50%. This demo uses the BrowserStack Java SDK with TestNG: 
- - App Repo – [test-selection-demo-app-browserstack](https://github.com/browserstack/test-selection-demo-app-browserstack)
+- App Repo – [test-selection-demo-app-browserstack](https://github.com/browserstack/test-selection-demo-app-browserstack)
 - Test Repo – [test-selection-demo-test-browserstack](https://github.com/browserstack/test-selection-demo-test-browserstack)
 ---
 
@@ -25,16 +25,16 @@ BrowserStack's Smart Test Selection Agent uses AI to identify and run only the t
 For detailed integration steps follow the [Test Selection Documentation](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java%2Ftestng).
 
 ## Steps to run the demo
-- This demo showcases BrowserStack's Smart Test Selection Agent using the git cloning integration approach. First, we train the agent on code changes from the `demo_app_v2` branch, and the build results in 7 test failures related to login flow code changes.
-- Then, we run the agent in prediction mode to see how it identifies impacted tests and runs only those, reducing execution time by upto 50%.
+- This demo showcases BrowserStack’s Smart Test Selection Agent using the **repo-cloning** integration approach. 
+- First, we run a build with Smart Test Selection disabled and then run the same build with it enabled, allowing you to clearly see the impact - with Test Selection, only the “likely to fail” tests run based on code changes, resulting in up to 50% reduction in execution time
 
 ### Prerequisites
 - Java & Maven 3.6+
 - Node.js 16+
-- BrowserStack Account with AI Enabled:[activate BrowserStack AI preferences](https://www.browserstack.com/docs/iaam/settings-and-permissions/activate-browserstack-ai)
+- BrowserStack Account with AI Enabled: [Activate BrowserStack AI preferences](https://www.browserstack.com/docs/iaam/settings-and-permissions/activate-browserstack-ai)
 ---
 
-### Step 1: Setup Demo App
+### Step 1: Clone App Repo
 
 ```
 git clone https://github.com/browserstack/test-selection-demo-app-browserstack.git
@@ -44,7 +44,7 @@ cd test-selection-demo-app-browserstack
 npm install
 
 # For the demo, checkout the feature branch
-git checkout demo-app-v2
+git checkout demo_app_v2
 ```
 
 ### Step 2: Setup Test Repo
@@ -57,74 +57,73 @@ cd test-selection-demo-test-browserstack
 # Checkout the TestNG demo branch
 git checkout testng-automate
 
-# Build the project (downloads dependencies)
-mvn clean install 
+# Build the project (downloads dependencies and skips running tests)
+mvn clean install -DskipTests
 ```  
 
-### Step 3: Setup the config file `browserstack.yml` in the test repo : 
-- Update `username` and `accesskey` in the browserstack.yml file with your BrowserStack access credentials [here](https://www.browserstack.com/accounts/profile/details)
+### Step 3: Add Browserstack Credentials
+- Update `username` and `accesskey` in the browserstack.yml file with your BrowserStack access credentials found [here](https://www.browserstack.com/accounts/profile/details)
+```
+username: <your-browserstack-username>
+accessKey: <your-browserstack-accesskey>
+```  
 
-- Enable Smart Test Selection using the following capabilities :
+### Step 4: Run a build without Smart Test Selection enabled
+- In `browserstack.yml`, add projectName, buildName and disable Test Selection
 ```yaml
+projectName: Smart Test Selection Demo Project
+buildName: Smart Test Selection Demo Prediction Build
+
+testOrchestrationOptions:
+  runSmartSelection:
+    enabled: false
+    mode: 'relevantOnly'
+    # specify absolute or relative paths of locally cloned demo app repo
+    # to include multiple app repos, add each as a separate line under source
+    source:
+      - '<path_to_demo_app_locally_cloned>
+    # - '/home/user/smart-test-selection-demo/app-repo-1'
+    # - '/home/user/smart-test-selection-demo/app-repo-2'
+```
+
+- Run the build with `mvn test` command
+- Results:
+  - All 32 tests run
+  - Execution time reflects a typical non-AI run
+  - This is our baseline - the full suite always runs regardless of which parts of the code changed
+
+
+### Step 5: Run a build with Smart Test Selection enabled
+- In `browserstack.yml`, enable Test Selection
+ ```yaml
+projectName: Smart Test Selection Demo Project
+buildName: Smart Test Selection Demo Prediction Build
+
 testOrchestrationOptions:
   runSmartSelection:
     enabled: true
-    source: # path to cloned demo app repo
-      - '<path_to_demo_app_locally_cloned>'
     mode: 'relevantOnly'
+    # specify absolute or relative paths of locally cloned demo app repo
+    # to include multiple app repos, add each as a separate line under source
+    source:
+      - '<path_to_demo_app_locally_cloned>
+    # - '/home/user/smart-test-selection-demo/app-repo-1'
+    # - '/home/user/smart-test-selection-demo/app-repo-2'
 ```
 
-### Step 4: Run the Agent in learning mode
-
-The agent learns from code changes in the `demo_app_v2` branch and analyzes the build results to understand test failure patterns.
-
-For the demo, follow the steps: 
-
-- Update the config file with project and build name : 
-```yaml
-...
-projectName: Smart Test Selection Demo Project
-buildName: Smart Test Selection Demo Training Build
-...
-```
-
-- Run the tests `mvn test`
-
-- Results
-![Learning mode Screenshot](./training_results.png)
-
-**Training Results:**
-- Total tests executed: Full test suite (32 tests)
-- Failures observed: 7 tests failed due to code changes
-- Learning status: Agent trained on code changes and test failure patterns.
+- Run the build again with `mvn test` command
+- Results:
+  - Smart Test Selection analyzes the code changes in the demo app
+  - It determines which tests are “likely to fail” based on those changes
+  - Instead of running all 32 tests, the agent selects and runs only this relevant subset (relevantOnly mode)
+  - All other unimpacted tests are automatically skipped/dropped
 
 
-### Step 5: Run the prediction build
+### Example Results
+![Prediction mode Screenshot](./prediction_results.png)
 
-After a few builds in learning mode, agent is trained to predict impacted tests for the incoming builds. 
-
-For the demo, run the prediction build using the following steps:
-
-- Update the config file with prediction build name: 
-```yaml
-...
-projectName: Smart Test Selection Demo Project
-buildName: Smart Test Selection Demo Prediction Build
-...
-```
-- Run the tests `mvn test`
-
-- Results
-![Learning mode Screenshot](./prediction_results.png)
-
-The agent successfully identified and ran only the impacted tests based on `demo_app_v2` branch changes, catching all failures while skipping irrelevant tests.
-
-**Key Results** : 
-- Total tests: 17 tests executed (vs full suite)
-- Impacted Tests caught: Most failing tests are identified and caught
+- Total tests: 17 ‘likely to fail’ tests executed (vs full suite)
 - Time saved: ~47% reduction in build time
-
-***Therefore, the agent was able to predict and run only the impacted tests based on submitted code changes (`demo_app_v2` branch) reducing build time and cost by up to 50%.***
 
 ## Additional Resources
 - [Smart Test Selection Documentation](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java) - Learn more about how Smart Test Selection works
