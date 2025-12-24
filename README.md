@@ -1,11 +1,11 @@
 # Smart Test Selection & Orchestration AI Agent Demo for BrowserStack Automate
 
 ## Table of Contents
-- [What is Smart Test Selection?](#-what-is-smart-test-selection)
+- [What is Smart Test Selection?](#what-is-smart-test-selection)
 
-- [How Smart Test Selection Agent Works](#how-test-selection-agent-works)
+- [How Smart Test Selection Agent Works](#how-smart-test-selection-agent-works)
 
-- [Steps to run the demo](#steps-to-run-the-sample-project)
+- [Steps to run the demo](#steps-to-run-the-demo)
 
 ---
 
@@ -24,6 +24,8 @@ BrowserStack's Smart Test Selection Agent uses AI to identify and run only the t
 
 For detailed integration steps follow the [Test Selection Documentation](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java%2Ftestng).
 
+---
+
 ## Steps to run the demo
 - This demo showcases BrowserStack’s Smart Test Selection Agent using the **repo-cloning** integration approach. 
 - First, we run a build with Smart Test Selection disabled and then run the same build with it enabled, allowing you to clearly see the impact - with Test Selection, only the “likely to fail” tests run based on code changes, resulting in up to 50% reduction in execution time
@@ -32,7 +34,6 @@ For detailed integration steps follow the [Test Selection Documentation](https:/
 - Java & Maven 3.6+
 - Node.js 16+
 - BrowserStack Account with AI Enabled: [Activate BrowserStack AI preferences](https://www.browserstack.com/docs/iaam/settings-and-permissions/activate-browserstack-ai)
----
 
 ### Step 1: Clone App Repo
 
@@ -93,6 +94,9 @@ testOrchestrationOptions:
   - This is our baseline - the full suite always runs regardless of which parts of the code changed
 
 
+### Example Results
+![Build with Selection Screenshot](./build_without_selection.png)
+
 ### Step 5: Run a build with Smart Test Selection enabled
 - In `browserstack.yml`, enable Test Selection
  ```yaml
@@ -124,6 +128,7 @@ testOrchestrationOptions:
 
 - Total tests: 17 ‘likely to fail’ tests executed (vs full suite)
 - Time saved: ~47% reduction in build time
+---
 
 ## Additional Resources
 - [Smart Test Selection Documentation](https://www.browserstack.com/docs/automate/selenium/smart-test-selection?fw-lang=java) - Learn more about how Smart Test Selection works
