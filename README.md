@@ -13,6 +13,7 @@
 BrowserStack's Smart Test Selection Agent uses AI to identify and run only the tests impacted (or likely to fail) by your code changes, reducing build time and cost by up to 50%. This demo uses the BrowserStack Java SDK with TestNG: 
 - App Repo – [test-selection-demo-app-browserstack](https://github.com/browserstack/test-selection-demo-app-browserstack)
 - Test Repo – [test-selection-demo-test-browserstack](https://github.com/browserstack/test-selection-demo-test-browserstack)
+  
 ---
 
 ## How Smart Test Selection Agent Works
@@ -128,6 +129,7 @@ testOrchestrationOptions:
 
 - Total tests: 17 ‘likely to fail’ tests executed (vs full suite)
 - Time saved: ~47% reduction in build time
+  
 ---
 
 ## Additional Resources
